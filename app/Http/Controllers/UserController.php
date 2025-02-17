@@ -4,8 +4,11 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\UserLoginRequest;
 use App\Http\Requests\UserRegisterRequest;
+use App\Http\Requests\UserUpdateRequest;
 use App\Http\Resources\UserResource;
 use App\Models\User;
+use Illuminate\Auth\Access\Response;
+use Illuminate\Auth\Events\Validated;
 use Illuminate\Http\Exceptions\HttpResponseException;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
@@ -59,6 +62,31 @@ class UserController extends Controller
 
     public function get(Request $request): UserResource {
         $user = Auth::user();
+        return new UserResource($user);
+    }
+
+    // public function getCurrentUser(Request $request): JsonResponse
+    // {
+    //     // Mengambil user yang sedang autentikasi
+    //     $user = $request->user();
+
+    //     // Mengembalikan data user
+    //     return response()->json($user);
+    // }
+    public function update(UserUpdateRequest $request): UserResource
+    {
+        $data = $request->Validated();
+        $user = Auth::user();
+
+        if(isset($data['name'])){
+            $user->name = $data['name'];
+        }
+
+        if(isset($data['password'])){
+            $user->password = Hash::make($data['password']);
+        }
+
+        // $user->save();
         return new UserResource($user);
     }
 }

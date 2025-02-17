@@ -6,6 +6,7 @@ use Illuminate\Contracts\Auth\Authenticatable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Laravel\Sanctum\HasApiTokens;
 
 class User extends Model implements Authenticatable
 {
@@ -20,6 +21,8 @@ class User extends Model implements Authenticatable
     //     'password',
     //     'name', 
     // ];
+
+    // use HasApiTokens;
 
     protected $guarded = [];
 
@@ -56,5 +59,7 @@ class User extends Model implements Authenticatable
     {
         return 'token';
     }
+
+    
 
 }
