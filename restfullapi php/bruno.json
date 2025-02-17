@@ -1,0 +1,9 @@
+{
+  "version": "1",
+  "name": "restfullapi php",
+  "type": "collection",
+  "ignore": [
+    "node_modules",
+    ".git"
+  ]
+}
