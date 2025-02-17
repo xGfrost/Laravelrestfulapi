@@ -86,7 +86,7 @@ class UserController extends Controller
             $user->password = Hash::make($data['password']);
         }
 
-        // $user->save();
+        $user->save();
         return new UserResource($user);
     }
 }
